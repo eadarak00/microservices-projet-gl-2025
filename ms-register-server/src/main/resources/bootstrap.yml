@@ -1,0 +1,4 @@
+# src/main/resources/bootstrap.yml
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888

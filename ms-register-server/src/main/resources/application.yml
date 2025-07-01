@@ -5,6 +5,9 @@ spring:
   application:
     name: ms-register-server
 
+  config:
+    import: "configserver:"
+
 eureka:
   client:
     register-with-eureka: false
