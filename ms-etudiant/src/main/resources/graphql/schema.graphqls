@@ -1,0 +1,14 @@
+type Query {
+  etudiants: [Etudiant]
+  rechercherEtudiant(id: ID!): Etudiant
+  etudiantsParPrenom(prenom: String!): [Etudiant]
+}
+
+type Etudiant {
+  id: ID
+  matricule: String 
+  nom: String
+  prenom: String
+  telephone : String
+  adresse: String
+}
