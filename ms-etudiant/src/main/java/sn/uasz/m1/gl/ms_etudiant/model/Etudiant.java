@@ -15,12 +15,15 @@ import lombok.Setter;
 @AllArgsConstructor 
 @NoArgsConstructor
 public class Etudiant {
-@Id
+
+    @Id
     private String id;
     private String matricule;
     private String nom;
     private String prenom;
     private String telephone;
     private String adresse;
+    private String classeId;
+
     
 }

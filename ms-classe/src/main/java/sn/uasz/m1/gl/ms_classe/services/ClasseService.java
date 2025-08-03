@@ -36,4 +36,8 @@ public class ClasseService {
     public List<Classe> getAll() {
         return repository.findAll();
     }
+
+    public Classe findByLibelle(String libelle){
+        return repository.findByLibelle(libelle);
+    }
 }

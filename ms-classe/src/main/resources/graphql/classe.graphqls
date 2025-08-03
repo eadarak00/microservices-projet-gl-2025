@@ -6,7 +6,20 @@ type Classe {
   departement: String
 }
 
+type Etudiant {
+  id: ID!
+  matricule: String
+  nom: String
+  prenom: String
+  telephone: String
+  adresse: String
+  classeId: String
+}
+
 type Query {
   classes: [Classe]
   rechercheClasse(libelle: String!): [Classe]
+  etudiantsByClasseId(classeId: String!): [Etudiant]
+  etudiantsByClasseLibelle(libelle: String!): [Etudiant]
+
 }

@@ -10,4 +10,6 @@ import sn.uasz.m1.gl.ms_classe.entities.Classe;
 @Repository
 public interface ClasseRepository extends MongoRepository<Classe, String> {
     List<Classe> findByLibelleContainingIgnoreCase(String libelle);
+
+    Classe findByLibelle(String libelle);
 }
