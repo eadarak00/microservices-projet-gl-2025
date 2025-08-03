@@ -9,7 +9,7 @@ import sn.uasz.m1.gl.ms_classe.entities.Classe;
 import sn.uasz.m1.gl.ms_classe.services.ClasseService;
 
 @RestController
-@RequestMapping("/classes")
+@RequestMapping("/classe")
 @RequiredArgsConstructor
 public class ClasseRestController {
 
