@@ -1,0 +1,35 @@
+# Fichiers générés par le build
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Fichiers de logs
+*.log
+
+# Fichiers temporaires
+*.tmp
+*.swp
+
+# IDEs : IntelliJ / Eclipse / VSCode
+.idea/
+*.iml
+*.ipr
+*.iws
+*.class
+.vscode/
+*.launch
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Configs locales
+.env
+*.local
+
+# Fichiers de test ou data runtime
+*.h2.db
+*.mv.db
+*.trace.db

@@ -1,0 +1,12 @@
+type Classe {
+  id: ID
+  libelle: String
+  niveau: String
+  specialite: String
+  departement: String
+}
+
+type Query {
+  classes: [Classe]
+  rechercheClasse(libelle: String!): [Classe]
+}

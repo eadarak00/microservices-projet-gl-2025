@@ -1,0 +1,14 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: ms-register-server
+
+  config:
+    import: "configserver:"
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

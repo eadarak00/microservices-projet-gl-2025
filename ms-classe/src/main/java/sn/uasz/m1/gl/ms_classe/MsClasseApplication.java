@@ -1,5 +1,6 @@
 package sn.uasz.m1.gl.ms_classe;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
