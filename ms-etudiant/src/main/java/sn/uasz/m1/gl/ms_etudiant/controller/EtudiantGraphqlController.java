@@ -9,9 +9,6 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import sn.uasz.m1.gl.ms_etudiant.model.Etudiant;
-
-
-
 import sn.uasz.m1.gl.ms_etudiant.service.EtudiantService;
 
 @Controller
