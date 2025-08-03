@@ -9,13 +9,12 @@ import sn.uasz.m1.gl.ms_classe.entities.Classe;
 import sn.uasz.m1.gl.ms_classe.services.ClasseService;
 
 @RestController
-@RequestMapping("/classe")
 @RequiredArgsConstructor
 public class ClasseRestController {
 
     private final ClasseService service;
 
-    @PostMapping
+    @PostMapping("/")
     public Classe create(@RequestBody Classe c) {
         return service.save(c);
     }
