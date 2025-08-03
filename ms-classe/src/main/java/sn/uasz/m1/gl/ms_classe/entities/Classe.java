@@ -13,9 +13,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class classe {
+public class Classe {
     @Id
-    private Long id;
+    private String id;
     private String libelle;
     private String niveau;
     private String specialite;
