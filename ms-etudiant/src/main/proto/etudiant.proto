@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+// Le package Java dans lequel les fichiers seront générés
+option java_package = "sn.uasz.m1.gl.ms_etudiant.grpc";
+option java_multiple_files = true;
+option java_outer_classname = "EtudiantServiceProto";
+
+package etudiant;
+
+//  Le service gRPC exposé par ms-etudiant
+service EtudiantService {
+  rpc GetEtudiantsByClasseId (ClasseRequest) returns (EtudiantListResponse);
+}
+
+// Requête : classeId
+message ClasseRequest {
+  string classeId = 1;
+}
+
+// Message étudiant
+message Etudiant {
+  string id = 1;
+  string matricule = 2;
+  string nom = 3;
+  string prenom = 4;
+  string telephone = 5;
+  string adresse = 6;
+  string classeId = 7;
+}
+
+// Réponse : liste d'étudiants
+message EtudiantListResponse {
+  repeated Etudiant etudiants = 1;
+}

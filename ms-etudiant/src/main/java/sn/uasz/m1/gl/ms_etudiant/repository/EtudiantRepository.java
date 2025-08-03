@@ -12,4 +12,8 @@ public interface EtudiantRepository extends MongoRepository<Etudiant, String>  {
 
 
     List<Etudiant> findByPrenomStartingWithIgnoreCase(String prenom);
+
+    // List<sn.uasz.m1.gl.ms_etudiant.grpc.Etudiant> findByClasseId(String classeId);
+    List<Etudiant> findByClasseId(String classeId);
+
 }
