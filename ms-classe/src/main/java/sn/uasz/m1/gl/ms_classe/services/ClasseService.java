@@ -29,8 +29,8 @@ public class ClasseService {
 
     public Classe getById(String id) { return repository.findById(id).orElseThrow(); }
 
-    public List<Classe> searchByNom(String nom) {
-        return repository.findByNomContainingIgnoreCase(nom);
+    public List<Classe> searchByLibelle(String libelle) {
+        return repository.findByLibelleContainingIgnoreCase(libelle);
     }
 
     public List<Classe> getAll() {
