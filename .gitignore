@@ -33,3 +33,6 @@ Thumbs.db
 *.h2.db
 *.mv.db
 *.trace.db
+
+#vscode
+.vscode
