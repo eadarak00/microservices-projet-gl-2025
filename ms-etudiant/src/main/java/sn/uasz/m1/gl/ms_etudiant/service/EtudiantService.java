@@ -16,9 +16,9 @@ public class EtudiantService {
     private EtudiantRepository repository;
     
     //Ajouter une Etudiant
-    public void ajouter(Etudiant p){
+    public Etudiant ajouter(Etudiant etudiant){
         
-        repository.save(p);
+       return repository.save(etudiant);
     }
 
     //Lister Etudiant

@@ -27,6 +27,11 @@ public class ClasseGraphqlController {
     }
 
     @QueryMapping
+    public Classe recherche(@Argument String id) {
+        return classeService.getById(id);
+    }
+
+    @QueryMapping
     public List<Classe> rechercheClasse(@Argument String libelle) {
         return classeService.searchByLibelle(libelle);
     }
