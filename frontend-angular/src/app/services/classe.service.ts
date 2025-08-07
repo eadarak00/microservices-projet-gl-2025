@@ -25,17 +25,20 @@ const LISTER_CLASSES = gql`
   providedIn: 'root',
 })
 export class ClasseService {
-  private apolloClient: ApolloBase;
+  private classeClient: ApolloBase;
   private apiUrl = `${environment.apiGatewayUrl}/classe`;
 
   constructor(private apollo: Apollo, private http: HttpClient) {
     // this.apolloClient = this.apollo.use('classeClient');
-    this.apolloClient = this.apollo;
+    this.classeClient = this.apollo.use('classeClient');
+    // this.etudiantClient = this.apollo.use('etudiantClient');
+    // this.apolloClient = this.apollo;
+
   }
 
 
   listerClasses(): Observable<Classe[]> {
-    return this.apolloClient
+    return this.classeClient
       .watchQuery<{ classes: Classe[] }>({
         query: LISTER_CLASSES,
       })

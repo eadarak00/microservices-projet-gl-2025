@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>Liste des étudiants</h2>
+
+  <button (click)="ouvrirModal(false)">Ajouter un étudiant</button>
+
+  <table border="1" cellpadding="5" cellspacing="0" *ngIf="etudiants.length > 0">
+    <thead>
+      <tr>
+        <th>Matricule</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Téléphone</th>
+        <th>Adresse</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let etudiant of etudiants">
+        <td>{{ etudiant.matricule }}</td>
+        <td>{{ etudiant.nom }}</td>
+        <td>{{ etudiant.prenom }}</td>
+        <td>{{ etudiant.telephone }}</td>
+        <td>{{ etudiant.adresse }}</td>
+        <td>
+          <button (click)="ouvrirModal(true, etudiant)">Modifier</button>
+          <button (click)="supprimer(etudiant.id!)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal d'ajout/modification -->
+  <div id="etudiantModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>{{ modeModification ? 'Modifier' : 'Ajouter' }} un étudiant</h3>
+      <form [formGroup]="etudiantForm" (ngSubmit)="onSubmit()">
+        <input type="text" placeholder="Matricule" formControlName="matricule" />
+        <div *ngIf="etudiantForm.controls['nom'].touched && etudiantForm.controls['nom'].invalid" class="error">Nom requis</div>
+        <input type="text" placeholder="Nom *" formControlName="nom" required />
+        <div *ngIf="etudiantForm.controls['prenom'].touched && etudiantForm.controls['prenom'].invalid" class="error">Prénom requis</div>
+        <input type="text" placeholder="Prénom *" formControlName="prenom" required />
+        <input type="text" placeholder="Téléphone" formControlName="telephone" />
+        <input type="text" placeholder="Adresse" formControlName="adresse" />
+
+        <select formControlName="classeId" required>
+          <option value="" disabled>-- Sélectionner une classe --</option>
+          <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.libelle }}</option>
+        </select>
+        <div *ngIf="etudiantForm.controls['classeId'].touched && etudiantForm.controls['classeId'].invalid" class="error">Classe requise</div>
+
+        <button type="submit" [disabled]="etudiantForm.invalid">
+          {{ modeModification ? 'Modifier' : 'Ajouter' }}
+        </button>
+        <button type="button" (click)="fermerModal()">Annuler</button>
+      </form>
+    </div>
+  </div>
+</div>

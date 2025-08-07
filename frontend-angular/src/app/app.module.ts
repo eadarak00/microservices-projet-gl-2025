@@ -7,22 +7,25 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ListClasseComponent } from './components/list-classe/list-classe.component';
-import { AjouterClasseComponent } from './components/ajouter-classe/ajouter-classe.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListEtudiantComponent } from './components/list-etudiant/list-etudiant.component';
+// import { EtudiantGraphQLModule } from './etudiant-graphql.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     ListClasseComponent,
-    AjouterClasseComponent,
+    ListEtudiantComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     GraphQLModule,
+    // EtudiantGraphQLModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

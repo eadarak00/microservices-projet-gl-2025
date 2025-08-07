@@ -12,7 +12,7 @@ import lombok.Setter;
 @Document(collection = "etudiants")
 @Getter
 @Setter
-@AllArgsConstructor 
+@AllArgsConstructor
 @NoArgsConstructor
 public class Etudiant {
 
@@ -25,5 +25,4 @@ public class Etudiant {
     private String adresse;
     private String classeId;
 
-    
 }
