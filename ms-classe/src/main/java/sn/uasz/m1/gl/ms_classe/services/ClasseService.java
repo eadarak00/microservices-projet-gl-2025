@@ -19,7 +19,7 @@ public class ClasseService {
     public Classe update(String id, Classe c) {
         Classe existing = repository.findById(id).orElseThrow();
         existing.setLibelle(c.getLibelle());
-        existing.setDepartememt(c.getDepartememt());
+        existing.setDepartement(c.getDepartement());
         existing.setSpecialite(c.getSpecialite());
         existing.setNiveau(c.getNiveau());
         return repository.save(existing);

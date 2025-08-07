@@ -1,0 +1,113 @@
+<!-- Hero Section -->
+<div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+  <div class="container mx-auto px-4 py-16">
+    <!-- Main Hero Content -->
+    <div class="text-center max-w-4xl mx-auto mb-16">
+      <!-- Animated Badge -->
+      <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium rounded-full mb-8 shadow-lg transform hover:scale-105 transition-transform duration-300">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+        Plateforme de gestion moderne
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+        Bienvenue sur
+        <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          EduManager
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+        Gérez facilement vos classes, suivez vos étudiants et optimisez l'apprentissage avec notre plateforme intuitive et moderne.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+        <a routerLink="/classe" 
+           class="group bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2">
+          <span>Voir les classes</span>
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        
+        <a routerLink="/eleves" 
+           class="bg-white text-indigo-600 px-8 py-4 rounded-xl text-lg font-semibold border-2 border-indigo-200 hover:bg-indigo-50 hover:border-indigo-300 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+          </svg>
+          <span>Gérer les élèves</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+      <!-- Feature 1 -->
+      <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 w-16 h-16 rounded-xl flex items-center justify-center mb-6 mx-auto">
+          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Gestion des Classes</h3>
+        <p class="text-gray-600 text-center leading-relaxed">
+          Organisez et gérez toutes vos classes en un seul endroit. Ajoutez, modifiez et suivez facilement vos groupes d'étudiants.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+        <div class="bg-gradient-to-br from-green-500 to-green-600 w-16 h-16 rounded-xl flex items-center justify-center mb-6 mx-auto">
+          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Suivi des Élèves</h3>
+        <p class="text-gray-600 text-center leading-relaxed">
+          Suivez les progrès individuels de chaque élève, gérez leurs informations personnelles et académiques efficacement.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 w-16 h-16 rounded-xl flex items-center justify-center mb-6 mx-auto">
+          <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.5 4a.5.5 0 01.5.5v4a.5.5 0 01-.5.5h-9a.5.5 0 01-.5-.5v-4a.5.5 0 01.5-.5h9z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Évaluation & Notes</h3>
+        <p class="text-gray-600 text-center leading-relaxed">
+          Système complet d'évaluation avec gestion des notes, bulletins et rapports de performance académique.
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-12 text-white text-center shadow-2xl max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8">Pourquoi choisir EduManager ?</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">99%</div>
+          <div class="text-indigo-100">Satisfaction utilisateur</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">24/7</div>
+          <div class="text-indigo-100">Support technique</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">100+</div>
+          <div class="text-indigo-100">Écoles partenaires</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Elements -->
+  <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full opacity-20 animate-bounce"></div>
+  <div class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full opacity-20 animate-pulse"></div>
+  <div class="absolute bottom-40 left-20 w-12 h-12 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-full opacity-20 animate-bounce delay-300"></div>
+</div>

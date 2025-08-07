@@ -1,16 +1,16 @@
 package sn.uasz.m1.gl.ms_classe.entities;
 
-import java.util.List;
+// import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
+// import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sn.uasz.m1.gl.ms_etudiant.grpc.Etudiant;
+// import sn.uasz.m1.gl.ms_etudiant.grpc.Etudiant;
 
 @Document("classes")
 @AllArgsConstructor
@@ -23,8 +23,5 @@ public class Classe {
     private String libelle;
     private String niveau;
     private String specialite;
-    private String departememt;
-
-    @Transient
-    List<Etudiant> etudiants;
+    private String departement;
 }
