@@ -151,6 +151,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClasseService } from 'src/app/services/classe.service';
 import { Classe } from 'src/app/models/classe'; // adapte selon ton modèle
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-classe',
@@ -163,7 +164,7 @@ export class ListClasseComponent implements OnInit {
   classeSelectionnee: Classe | null = null;
   modeModification: boolean = false;
 
-  constructor(private fb: FormBuilder, private classeService: ClasseService) {}
+  constructor(private fb: FormBuilder, private classeService: ClasseService, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -249,6 +250,10 @@ export class ListClasseComponent implements OnInit {
         error: (err) => console.error('Erreur suppression:', err),
       });
     }
+  }
+
+  details(id: string): void {
+    this.router.navigate(['/classe', id, 'etudiants']);
   }
 }
 

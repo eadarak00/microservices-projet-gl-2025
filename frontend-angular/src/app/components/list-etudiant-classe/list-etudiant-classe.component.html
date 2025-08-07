@@ -1,0 +1,23 @@
+<div class="p-4">
+   <h2 class="text-2xl font-bold mb-4 text-gray-800">
+    Étudiants de la classe "{{ classeNom }}" (ID: {{ classeId }})
+  </h2>
+  <table class="min-w-full bg-white shadow rounded">
+    <thead>
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Matriule</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nom</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prénom</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Téléphone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let etudiant of etudiants" class="hover:bg-gray-100">
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.matricule }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.nom }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.prenom }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.telephone }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

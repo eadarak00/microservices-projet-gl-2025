@@ -19,6 +19,7 @@ type Etudiant {
 type Query {
   classes: [Classe]
   rechercheClasse(libelle: String!): [Classe]
+  recherche(id: ID!): Classe
   etudiantsByClasseId(classeId: String!): [Etudiant]
   etudiantsByClasseLibelle(libelle: String!): [Etudiant]
 

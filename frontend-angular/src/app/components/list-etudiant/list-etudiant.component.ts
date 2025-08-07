@@ -4,6 +4,7 @@ import { EtudiantService } from 'src/app/services/etudiant.service';
 import { ClasseService } from 'src/app/services/classe.service';
 import { Etudiant } from 'src/app/models/etudiant';
 import { Classe } from 'src/app/models/classe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-etudiant',
@@ -21,7 +22,8 @@ export class ListEtudiantComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private etudiantService: EtudiantService,
-    private classeService: ClasseService
+    private classeService: ClasseService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

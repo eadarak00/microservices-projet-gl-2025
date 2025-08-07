@@ -9,6 +9,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ListClasseComponent } from './components/list-classe/list-classe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListEtudiantComponent } from './components/list-etudiant/list-etudiant.component';
+import { ListEtudiantClasseComponent } from './components/list-etudiant-classe/list-etudiant-classe.component';
 // import { EtudiantGraphQLModule } from './etudiant-graphql.module';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ListEtudiantComponent } from './components/list-etudiant/list-etudiant.
     AppComponent,
     LandingPageComponent,
     ListClasseComponent,
-    ListEtudiantComponent
+    ListEtudiantComponent,
+    ListEtudiantClasseComponent
   ],
   imports: [
     BrowserModule,
