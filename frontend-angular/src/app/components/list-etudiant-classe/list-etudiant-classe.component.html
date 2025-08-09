@@ -1,23 +1,273 @@
-<div class="p-4">
-   <h2 class="text-2xl font-bold mb-4 text-gray-800">
-    Étudiants de la classe "{{ classeNom }}" (ID: {{ classeId }})
-  </h2>
-  <table class="min-w-full bg-white shadow rounded">
-    <thead>
-      <tr>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Matriule</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nom</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prénom</th>
-        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Téléphone</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let etudiant of etudiants" class="hover:bg-gray-100">
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.matricule }}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.nom }}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.prenom }}</td>
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ etudiant.telephone }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 sm:p-6 lg:p-8">
+  <!-- Header Section -->
+  <div class="mb-8">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+      <!-- Title Section -->
+      <div class="flex items-center space-x-4">
+        <div class="flex-shrink-0 relative">
+          <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3">
+            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+          </div>
+          <div class="absolute -top-1 -right-1 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center shadow-md">
+            <i class="fas fa-check text-xs text-white"></i>
+          </div>
+        </div>
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+            Étudiants de la classe
+          </h1>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-2">
+            <h2 class="text-xl font-semibold text-blue-600" *ngIf="classeNom">
+              <i class="fas fa-quote-left text-sm opacity-60 mr-1"></i>"{{ classeNom }}"<i class="fas fa-quote-right text-sm opacity-60 ml-1"></i>
+            </h2>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border border-blue-200">
+              <i class="fas fa-id-badge mr-1"></i>ID: {{ classeId }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap gap-3">
+        <button (click)="exportToCSV()" 
+                class="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+          <i class="fas fa-file-csv mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
+          Exporter CSV
+        </button>
+        <button (click)="exportToPDF()" 
+                class="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white text-sm font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+          <i class="fas fa-file-pdf mr-2 group-hover:scale-110 transition-transform duration-300"></i>
+          Exporter PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Card -->
+    <div class="mt-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 hover:shadow-2xl transition-all duration-300">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 to-green-500 rounded-xl flex items-center justify-center shadow-lg">
+            <i class="fas fa-users text-xl text-white"></i>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Étudiants</p>
+            <p class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              {{ filteredEtudiants.length }}
+            </p>
+          </div>
+        </div>
+        <div class="text-right bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4">
+          <p class="text-sm text-gray-500 flex items-center">
+            <i class="fas fa-book-open mr-2 text-blue-500"></i>
+            Page {{ currentPage }} sur {{ totalPages || 1 }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Filters -->
+  <div class="mb-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
+    <div class="flex flex-col lg:flex-row lg:items-center gap-6">
+      <!-- Search Input -->
+      <div class="flex-1 relative group">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <i class="fas fa-search text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200"></i>
+        </div>
+        <input type="text" 
+               [(ngModel)]="searchTerm" 
+               (input)="onSearch()"
+               placeholder="Rechercher par nom, prénom, matricule ou téléphone..."
+               class="block w-full pl-12 pr-12 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white/50 backdrop-blur-sm placeholder-gray-400 transition-all duration-200">
+        <button *ngIf="searchTerm" 
+                (click)="clearSearch()"
+                class="absolute inset-y-0 right-0 pr-4 flex items-center hover:bg-gray-100 rounded-r-xl transition-colors duration-200">
+          <i class="fas fa-times text-gray-400 hover:text-red-500 transition-colors duration-200"></i>
+        </button>
+      </div>
+
+      <!-- Items per page selector -->
+      <div class="flex items-center space-x-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4">
+        <label class="text-sm font-semibold text-gray-700 flex items-center">
+          <i class="fas fa-list-ul mr-2 text-blue-500"></i>Afficher:
+        </label>
+        <select [(ngModel)]="itemsPerPage" 
+                (change)="currentPage = 1"
+                class="border-2 border-gray-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white font-semibold">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Container -->
+  <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="flex flex-col items-center justify-center py-20">
+      <div class="relative">
+        <div class="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mb-6"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <i class="fas fa-graduation-cap text-blue-600"></i>
+        </div>
+      </div>
+      <p class="text-gray-600 text-lg font-semibold">Chargement des étudiants...</p>
+      <p class="text-gray-400 text-sm mt-1">Veuillez patienter</p>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="!loading" class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+          <tr>
+            <th (click)="sortBy('matricule')" 
+                class="group px-8 py-6 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-200 transition-all duration-200">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-id-card text-blue-500"></i>
+                <span>Matricule</span>
+                <i class="fas {{ getSortIcon('matricule') }} text-gray-400 group-hover:text-blue-500 transition-colors duration-200"></i>
+              </div>
+            </th>
+            <th (click)="sortBy('nom')" 
+                class="group px-8 py-6 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-200 transition-all duration-200">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-user text-green-500"></i>
+                <span>Nom</span>
+                <i class="fas {{ getSortIcon('nom') }} text-gray-400 group-hover:text-green-500 transition-colors duration-200"></i>
+              </div>
+            </th>
+            <th (click)="sortBy('prenom')" 
+                class="group px-8 py-6 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-200 transition-all duration-200">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-user-tag text-purple-500"></i>
+                <span>Prénom</span>
+                <i class="fas {{ getSortIcon('prenom') }} text-gray-400 group-hover:text-purple-500 transition-colors duration-200"></i>
+              </div>
+            </th>
+            <th class="px-8 py-6 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-phone text-orange-500"></i>
+                <span>Téléphone</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-100">
+          <tr *ngFor="let etudiant of paginatedEtudiants; let i = index" 
+              class="group hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200 hover:shadow-md">
+            <td class="px-8 py-6 whitespace-nowrap">
+              <span class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 font-mono border border-blue-200 shadow-sm">
+                <i class="fas fa-hashtag mr-2 opacity-60"></i>{{ etudiant.matricule }}
+              </span>
+            </td>
+            <td class="px-8 py-6 whitespace-nowrap">
+              <div class="flex items-center space-x-3">
+                <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-md">
+                  <i class="fas fa-user text-white text-sm"></i>
+                </div>
+                <div class="text-sm font-bold text-gray-900">{{ etudiant.nom }}</div>
+              </div>
+            </td>
+            <td class="px-8 py-6 whitespace-nowrap">
+              <div class="text-sm font-semibold text-gray-700">{{ etudiant.prenom }}</div>
+            </td>
+            <td class="px-8 py-6 whitespace-nowrap">
+              <a href="tel:{{ etudiant.telephone }}" 
+                 class="group inline-flex items-center px-3 py-2 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200 font-semibold">
+                <i class="fas fa-phone-alt mr-2 group-hover:rotate-12 transition-transform duration-200"></i>
+                {{ etudiant.telephone }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Empty State -->
+      <div *ngIf="filteredEtudiants.length === 0" class="text-center py-20">
+        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl mb-6 shadow-lg">
+          <i class="fas fa-graduation-cap text-3xl text-gray-400"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Aucun étudiant trouvé</h3>
+        <p class="text-gray-500 mb-6 max-w-md mx-auto">
+          {{ searchTerm ? 'Aucun résultat ne correspond à votre recherche. Essayez avec des mots-clés différents.' : 'Cette classe ne contient aucun étudiant pour le moment.' }}
+        </p>
+        <button *ngIf="searchTerm" 
+                (click)="clearSearch()"
+                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+          <i class="fas fa-eraser mr-2"></i>Effacer la recherche
+        </button>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="!loading && filteredEtudiants.length > 0" 
+         class="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-t border-gray-200">
+      <div class="flex items-center justify-between">
+        <div class="flex-1 flex justify-between sm:hidden">
+          <button (click)="goToPage(currentPage - 1)" 
+                  [disabled]="currentPage === 1"
+                  [class.opacity-50]="currentPage === 1"
+                  [class.cursor-not-allowed]="currentPage === 1"
+                  class="relative inline-flex items-center px-6 py-3 border-2 border-gray-300 text-sm font-semibold rounded-xl text-gray-700 bg-white hover:bg-gray-50 transition-all duration-200 shadow-md">
+            <i class="fas fa-chevron-left mr-2"></i>Précédent
+          </button>
+          <button (click)="goToPage(currentPage + 1)" 
+                  [disabled]="currentPage === totalPages"
+                  [class.opacity-50]="currentPage === totalPages"
+                  [class.cursor-not-allowed]="currentPage === totalPages"
+                  class="ml-3 relative inline-flex items-center px-6 py-3 border-2 border-gray-300 text-sm font-semibold rounded-xl text-gray-700 bg-white hover:bg-gray-50 transition-all duration-200 shadow-md">
+            Suivant<i class="fas fa-chevron-right ml-2"></i>
+          </button>
+        </div>
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <div class="bg-white rounded-xl px-4 py-2 shadow-md border border-gray-200">
+            <p class="text-sm text-gray-700 font-semibold">
+              <i class="fas fa-info-circle mr-2 text-blue-500"></i>
+              Affichage de 
+              <span class="font-bold text-blue-600">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+              à 
+              <span class="font-bold text-blue-600">{{ Math.min(currentPage * itemsPerPage, filteredEtudiants.length) }}</span>
+              sur 
+              <span class="font-bold text-blue-600">{{ filteredEtudiants.length }}</span>
+              résultats
+            </p>
+          </div>
+          <div>
+            <nav class="relative z-0 inline-flex rounded-xl shadow-lg" aria-label="Pagination">
+              <button (click)="goToPage(currentPage - 1)" 
+                      [disabled]="currentPage === 1"
+                      class="relative inline-flex items-center px-3 py-2 rounded-l-xl border-2 border-gray-300 bg-white text-sm font-semibold text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+                <span class="sr-only">Précédent</span>
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              
+              <button *ngFor="let page of pageNumbers.slice(Math.max(0, currentPage - 3), Math.min(totalPages, currentPage + 2))" 
+                      (click)="goToPage(page)"
+                      [class.bg-gradient-to-r]="page === currentPage"
+                      [class.from-blue-500]="page === currentPage"
+                      [class.to-indigo-600]="page === currentPage"
+                      [class.border-blue-500]="page === currentPage"
+                      [class.text-white]="page === currentPage"
+                      [class.shadow-lg]="page === currentPage"
+                      class="relative inline-flex items-center px-4 py-2 border-2 border-gray-300 bg-white text-sm font-bold text-gray-700 hover:bg-gray-50 transition-all duration-200">
+                {{ page }}
+              </button>
+              
+              <button (click)="goToPage(currentPage + 1)" 
+                      [disabled]="currentPage === totalPages"
+                      class="relative inline-flex items-center px-3 py-2 rounded-r-xl border-2 border-gray-300 bg-white text-sm font-semibold text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+                <span class="sr-only">Suivant</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Ajoutez Font Awesome dans votre index.html ou angular.json -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

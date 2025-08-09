@@ -1,124 +1,1384 @@
-<div class="p-6">
-    <!-- Bouton Ajouter -->
-    <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-semibold text-gray-800">Liste des classes</h2>
-        <button (click)="ouvrirModal()"
-            class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center space-x-2 shadow-md hover:shadow-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-            <span>Ajouter une classe</span>
-        </button>
-    </div>
+<!-- <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4 lg:p-8">
+    <div class="max-w-7xl mx-auto">
 
-    <!-- Tableau des classes -->
-    <div class="overflow-x-auto bg-white rounded-lg shadow">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Nom
-                    </th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Niveau
-                    </th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                        specialite</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
-                        Departement</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Actions
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-                <tr *ngFor="let classe of classes">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ classe.libelle }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ classe.niveau }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ classe.specialite }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ classe.departement }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 space-x-2">
+        <!-- En-tête principal avec design moderne 
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-6 lg:p-8 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+                <!-- Titre avec icône et statistiques 
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-2xl shadow-lg">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1
+                                class="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                                Gestion des Classes
+                            </h1>
+                            <p class="text-gray-600 mt-1">Organisez et gérez vos classes efficacement</p>
+                        </div>
+                    </div>
+
+                    <!-- Statistiques rapides 
+                    <div class="hidden lg:flex items-center space-x-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-indigo-600">{{ classesFiltrees.length }}</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Classes</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-emerald-600">{{ niveauxDisponibles.length }}</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Niveaux</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton d'ajout principal 
+                <button (click)="ouvrirModal()"
+                    class="group relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="relative flex items-center space-x-3">
+                        <svg class="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span class="text-lg">Nouvelle Classe</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Barre de recherche et filtres 
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/30 p-6 mb-8">
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
+
+                <!-- Champ de recherche avec icône 
+                <div class="relative flex-1 max-w-md">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" placeholder="Rechercher par nom, spécialité, département..."
+                        [(ngModel)]="searchTerm" (input)="filtrerClasses()"
+                        class="w-full pl-14 pr-12 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 shadow-sm hover:shadow-md text-lg" />
+                    <button *ngIf="searchTerm" (click)="searchTerm = ''; filtrerClasses()"
+                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Filtre par niveau 
+                <div class="relative">
+                    <select [(ngModel)]="filtreNiveau" (change)="filtrerClasses()"
+                        class="appearance-none bg-white border-2 border-gray-200 rounded-2xl px-6 py-4 pr-12 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 shadow-sm hover:shadow-md min-w-[220px] text-lg font-medium">
+                        <option value="">🎯 Tous les niveaux</option>
+                        <option *ngFor="let niveau of niveauxDisponibles" [value]="niveau">
+                            📚 {{ niveau }}
+                        </option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Indicateur de résultats 
+                <div class="flex items-center space-x-2 text-gray-600 bg-gray-50 px-4 py-2 rounded-xl">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <span class="font-medium">{{ classesFiltrees.length }} résultat(s)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vue Desktop - Tableau moderne 
+        <div class="hidden lg:block">
+            <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/30 overflow-hidden">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-gray-50 via-blue-50 to-indigo-50 border-b-2 border-indigo-100">
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-2xl">📝</span>
+                                    <span>Nom de la classe</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-2xl">📊</span>
+                                    <span>Niveau</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-2xl">🎓</span>
+                                    <span>Spécialité</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-2xl">🏢</span>
+                                    <span>Département</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-center text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center justify-center space-x-3">
+                                    <span class="text-2xl">⚙️</span>
+                                    <span>Actions</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr *ngFor="let classe of classesFiltrees; let i = index"
+                            class="hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-indigo-50/50 transition-all duration-300 group"
+                            [style.animation-delay.ms]="i * 100">
+                            <td class="px-8 py-6">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-3 h-3 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    </div>
+                                    <span
+                                        class="text-lg font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">
+                                        {{ classe.libelle }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span
+                                    class="inline-flex items-center px-4 py-2 rounded-2xl text-sm font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-2 border-blue-200 shadow-sm">
+                                    {{ classe.niveau }}
+                                </span>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="text-lg text-gray-700 font-medium">{{ classe.specialite }}</span>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="text-lg text-gray-700 font-medium">{{ classe.departement }}</span>
+                            </td>
+                            <td class="px-8 py-6">
+                                <div class="flex items-center justify-center space-x-3">
+                                    <button (click)="ouvrirModal(true, classe)"
+                                        class="group/btn p-3 text-emerald-600 hover:text-white hover:bg-emerald-500 rounded-2xl transition-all duration-200 transform hover:scale-110 shadow-lg hover:shadow-xl"
+                                        title="Modifier la classe">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M16.5 3.5a2.121 2.121 0 113 3L12 14l-4 1 1-4 7.5-7.5z" />
+                                        </svg>
+                                    </button>
+                                    <button (click)="details(classe.id!)"
+                                        class="group/btn p-3 text-blue-600 hover:text-white hover:bg-blue-500 rounded-2xl transition-all duration-200 transform hover:scale-110 shadow-lg hover:shadow-xl"
+                                        title="Voir les détails">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </button>
+                                    <button (click)="supprimer(classe.id!)"
+                                        class="group/btn p-3 text-red-600 hover:text-white hover:bg-red-500 rounded-2xl transition-all duration-200 transform hover:scale-110 shadow-lg hover:shadow-xl"
+                                        title="Supprimer la classe">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- État vide 
+                        <tr *ngIf="classesFiltrees.length === 0">
+                            <td colspan="5" class="px-8 py-16 text-center">
+                                <div class="flex flex-col items-center space-y-6">
+                                    <div
+                                        class="w-24 h-24 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-semibold text-gray-600 mb-2">Aucune classe trouvée</p>
+                                        <p class="text-lg text-gray-400">Ajoutez votre première classe ou modifiez vos
+                                            critères de recherche</p>
+                                    </div>
+                                    <button (click)="ouvrirModal()"
+                                        class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-200">
+                                        Créer une classe
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Vue Mobile - Cartes 
+        <div class="lg:hidden space-y-6">
+            <div *ngFor="let classe of classesFiltrees; let i = index"
+                class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/30 p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                [style.animation-delay.ms]="i * 100">
+
+                <!-- En-tête de la carte 
+                <div class="flex justify-between items-start mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-4 h-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+                        <h3 class="text-xl font-bold text-gray-900">{{ classe.libelle }}</h3>
+                    </div>
+                    <span
+                        class="inline-flex items-center px-4 py-2 rounded-2xl text-sm font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-2 border-blue-200">
+                        {{ classe.niveau }}
+                    </span>
+                </div>
+
+                <!-- Informations de la classe 
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-2xl">
+                        <span class="text-2xl">🎓</span>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Spécialité</p>
+                            <p class="text-lg font-semibold text-gray-900">{{ classe.specialite }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-2xl">
+                        <span class="text-2xl">🏢</span>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Département</p>
+                            <p class="text-lg font-semibold text-gray-900">{{ classe.departement }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions de la carte 
+                <div class="flex justify-between items-center pt-4 border-t-2 border-gray-100">
+                    <div class="flex space-x-3">
                         <button (click)="ouvrirModal(true, classe)"
-                            class="text-green-600 hover:text-green-800 p-1 rounded hover:bg-green-50 transition"
-                            title="Modifier">
-                            <!-- ici tu peux ajouter une icône, par ex. un crayon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M16.5 3.5a2.121 2.121 0 113 3L12 14l-4 1 1-4 7.5-7.5z" />
+                            class="flex items-center space-x-2 px-4 py-3 text-emerald-600 hover:bg-emerald-50 rounded-2xl transition-all duration-200 transform hover:scale-105">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5" />
                             </svg>
+                            <span class="font-semibold">Modifier</span>
                         </button>
-                        <button (click)="supprimer(classe.id!)"
-                            class="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-50 transition"
-                            title="Supprimer">
-                            <!-- icône poubelle -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19 7L5 7M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12M10 11v6M14 11v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3" />
-                            </svg>
-                        </button>
-
                         <button (click)="details(classe.id!)"
-                            class="text-blue-600 hover:text-blue-800 p-1 rounded hover:bg-blue-50 transition"
-                            title="Détails">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            class="flex items-center space-x-2 px-4 py-3 text-blue-600 hover:bg-blue-50 rounded-2xl transition-all duration-200 transform hover:scale-105">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
+                            <span class="font-semibold">Détails</span>
                         </button>
-                    </td>
+                    </div>
+                    <button (click)="supprimer(classe.id!)"
+                        class="p-3 text-red-600 hover:bg-red-50 rounded-2xl transition-all duration-200 transform hover:scale-105">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
-                </tr>
-            </tbody>
-        </table>
+            <!-- État vide mobile 
+            <div *ngIf="classesFiltrees.length === 0" class="text-center py-16">
+                <div class="flex flex-col items-center space-y-6">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xl font-semibold text-gray-600 mb-2">Aucune classe trouvée</p>
+                        <p class="text-gray-400">Ajoutez une classe ou modifiez votre recherche</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- MODAL AJOUT / MODIFICATION -->
-<div id="ajouterClasseModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-        <button class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold"
-            (click)="fermerModal()">
-            &times;
-        </button>
-        <h3 class="text-xl font-semibold mb-4 text-gray-800">
-            {{ modeModification ? 'Modifier une classe' : 'Ajouter une classe' }}
-        </h3>
+<!-- MODAL MODERNE AJOUT/MODIFICATION 
+<div id="ajouterClasseModal"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50 hidden p-4 transition-all duration-300">
+    <div
+        class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl relative transform transition-all duration-300 max-h-[90vh] overflow-y-auto">
 
-        <form [formGroup]="classeForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Nom de la classe</label>
-                <input formControlName="libelle" type="text"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
-                    placeholder="Ex: 6ème A" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Niveau</label>
-                <input formControlName="niveau" type="text"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
-                    placeholder="Ex: Collège, Lycée" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">specialite</label>
-                <input formControlName="specialite" type="text"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
-                    placeholder="Ex: Collège, Lycée" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">departement</label>
-                <input formControlName="departement" type="text"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200"
-                    placeholder="Ex: Collège, Lycée" />
-            </div>
+        <!-- En-tête du modal 
+        <div
+            class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 rounded-t-3xl p-8 relative overflow-hidden">
+            <div class="absolute inset-0 bg-white/10"></div>
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-white/5 rounded-full"></div>
 
-            <div class="flex justify-end space-x-2 pt-4">
-                <button type="button" (click)="fermerModal()"
-                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded">
-                    Annuler
-                </button>
-                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">
-                    {{ modeModification ? 'Modifier' : 'Ajouter' }}
+            <div class="relative flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-1">
+                            {{ modeModification ? 'Modifier la classe' : 'Nouvelle classe' }}
+                        </h3>
+                        <p class="text-white/90 text-lg">
+                            {{ modeModification ? 'Modifiez les informations de la classe' : 'Créez une nouvelle classe
+                            pour votre établissement' }}
+                        </p>
+                    </div>
+                </div>
+                <button (click)="fermerModal()"
+                    class="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-2xl flex items-center justify-center transition-all duration-200 group backdrop-blur-sm">
+                    <svg class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-200" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </button>
             </div>
-        </form>
+        </div>
+
+        <!-- Corps du modal 
+        <div class="p-8">
+            <form [formGroup]="classeForm" (ngSubmit)="onSubmit()" class="space-y-8">
+
+                <!-- Grille des champs 
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <!-- Nom de la classe 
+                    <div class="lg:col-span-2">
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <span class="text-2xl">📝</span>
+                            <span>Nom de la classe</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <div class="relative group">
+                            <input formControlName="libelle" type="text"
+                                class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg group-hover:shadow-lg"
+                                placeholder="Ex: 6ème A, Terminal S1, Master Info..." />
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
+                                <div
+                                    class="w-3 h-3 bg-indigo-400 rounded-full opacity-0 group-focus-within:opacity-100 transition-opacity duration-300">
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="libelleControl?.invalid && libelleControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" />
+                            </svg>
+                            <span class="font-semibold">Le nom de la classe est obligatoire</span>
+                        </div>
+                    </div>
+
+                    <!-- Niveau 
+                    <div>
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <span class="text-2xl">📊</span>
+                            <span>Niveau</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <input formControlName="niveau" type="text"
+                            class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg hover:shadow-lg"
+                            placeholder="Ex: Collège, Lycée, Université..." />
+                        <div *ngIf="niveauControl?.invalid && niveauControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" />
+                            </svg>
+                            <span class="font-semibold">Le niveau est obligatoire</span>
+                        </div>
+                    </div>
+
+                    <!-- Spécialité 
+                    <div>
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <span class="text-2xl">🎓</span>
+                            <span>Spécialité</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <input formControlName="specialite" type="text"
+                            class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg hover:shadow-lg"
+                            placeholder="Ex: Informatique, Mathématiques, Littéraire..." />
+                        <div *ngIf="specialiteControl?.invalid && specialiteControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" />
+                            </svg>
+                            <span class="font-semibold">La spécialité est obligatoire</span>
+                        </div>
+                    </div>
+
+                    <!-- Département 
+                    <div class="lg:col-span-2">
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <span class="text-2xl">🏢</span>
+                            <span>Département</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <input formControlName="departement" type="text"
+                            class="w-full px-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg hover:shadow-lg"
+                            placeholder="Ex: Sciences, Lettres, Technologie, Arts..." />
+                        <div *ngIf="departementControl?.invalid && departementControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" />
+                            </svg>
+                            <span class="font-semibold">Le département est obligatoire</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zone d'aide 
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-2xl border-2 border-blue-100">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-blue-900 mb-2">💡 Conseils pour bien remplir</h4>
+                            <ul class="text-blue-800 space-y-1 text-base">
+                                <li>• <strong>Nom :</strong> Utilisez une nomenclature claire (ex: "6ème A", "Terminal
+                                    S1")</li>
+                                <li>• <strong>Niveau :</strong> Précisez le cycle ou degré d'enseignement</li>
+                                <li>• <strong>Spécialité :</strong> Indiquez la filière ou domaine principal</li>
+                                <li>• <strong>Département :</strong> Organisez vos classes par département</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boutons d'action 
+                <div
+                    class="flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-6 border-t-2 border-gray-100">
+                    <button type="button" (click)="fermerModal()"
+                        class="group px-8 py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-2xl font-bold transition-all duration-200 transform hover:scale-105 text-lg">
+                        <div class="flex items-center justify-center space-x-3">
+                            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            <span>Annuler</span>
+                        </div>
+                    </button>
+                    <button type="submit"
+                        class="group relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white px-12 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl text-lg overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                        <div class="relative flex items-center justify-center space-x-3">
+                            <svg class="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path [attr.d]="modeModification ? 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5' 
+  : 'M12 4v16m8-8H4'">
+                                </path>
+
+                                <path *ngIf="modeModification" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M16.5 3.5a2.121 2.121 0 113 3L12 14l-4 1 1-4 7.5-7.5z" />
+                            </svg>
+                            <span>{{ modeModification ? 'Mettre à jour' : 'Créer la classe' }}</span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+<!-- Styles CSS additionnels 
+<style>
+    /* Animations personnalisées */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Effets au survol pour les cartes */
+    .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Animation d'apparition des éléments */
+    .animate-item {
+        animation: slideDown 0.6s ease-out both;
+    }
+
+    /* Effet de brillance sur les boutons */
+    .btn-shine::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .btn-shine:hover::before {
+        left: 100%;
+    }
+
+    /* Scrollbar personnalisée */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #4f46e5, #7c3aed);
+    }
+
+    /* Focus visible amélioré */
+    input:focus,
+    select:focus,
+    button:focus {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    /* Effet de pulsation pour les éléments importants */
+    .pulse-glow {
+        animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+
+        0%,
+        100% {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        50% {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
+        }
+    }
+</style>
+
+<script>
+    // Script pour améliorer l'expérience utilisateur
+    document.addEventListener('DOMContentLoaded', function () {
+        // Animation d'apparition progressive des éléments
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-item');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observer tous les éléments avec la classe card-hover
+        document.querySelectorAll('.card-hover, tr').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Effet de focus amélioré pour les champs de saisie
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('focus', function () {
+                this.parentElement.classList.add('ring-4', 'ring-indigo-200');
+            });
+
+            input.addEventListener('blur', function () {
+                this.parentElement.classList.remove('ring-4', 'ring-indigo-200');
+            });
+        });
+
+        // Animation pour le compteur de résultats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 20;
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.floor(current);
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 50);
+        }
+
+        // Animer les compteurs lors du chargement
+        const counters = document.querySelectorAll('[class*="text-3xl font-bold"]');
+        counters.forEach(counter => {
+            const target = parseInt(counter.textContent);
+            if (target > 0) {
+                counter.textContent = '0';
+                setTimeout(() => animateCounter(counter, target), 500);
+            }
+        });
+    });
+</script> -->
+
+
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4 lg:p-8">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- En-tête principal avec design moderne -->
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-6 lg:p-8 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+                <!-- Titre avec icône et statistiques -->
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-4 rounded-2xl shadow-lg">
+                            <i class="fas fa-school text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1
+                                class="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                                Gestion des Classes
+                            </h1>
+                            <p class="text-gray-600 mt-1">Organisez et gérez vos classes efficacement</p>
+                        </div>
+                    </div>
+
+                    <!-- Statistiques rapides -->
+                    <div class="hidden lg:flex items-center space-x-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-indigo-600">{{ classesFiltrees.length }}</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Classes</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-emerald-600">{{ niveauxDisponibles.length }}</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Niveaux</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton d'ajout principal -->
+                <button (click)="ouvrirModal()"
+                    class="group relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="relative flex items-center space-x-3">
+                        <i class="fas fa-plus text-xl group-hover:rotate-90 transition-transform duration-300"></i>
+                        <span class="text-lg">Nouvelle Classe</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Barre de recherche et filtres -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg border border-white/30 p-6 mb-8">
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
+
+                <!-- Champ de recherche avec icône -->
+                <div class="relative flex-1 max-w-md">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400 text-xl"></i>
+                    </div>
+                    <input type="text" placeholder="Rechercher par nom, spécialité, département..."
+                        [(ngModel)]="searchTerm" (input)="filtrerClasses()"
+                        class="w-full pl-14 pr-12 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 shadow-sm hover:shadow-md text-lg" />
+                    <button *ngIf="searchTerm" (click)="searchTerm = ''; filtrerClasses()"
+                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Filtre par niveau -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-filter text-indigo-500"></i>
+                    </div>
+                    <select [(ngModel)]="filtreNiveau" (change)="filtrerClasses()"
+                        class="appearance-none bg-white border-2 border-gray-200 rounded-2xl pl-12 pr-12 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 shadow-sm hover:shadow-md min-w-[220px] text-lg font-medium">
+                        <option value="">Tous les niveaux</option>
+                        <option *ngFor="let niveau of niveauxDisponibles" [value]="niveau">
+                            {{ niveau }}
+                        </option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Indicateur de résultats -->
+                <div class="flex items-center space-x-2 text-gray-600 bg-gray-50 px-4 py-2 rounded-xl">
+                    <i class="fas fa-chart-bar text-indigo-500"></i>
+                    <span class="font-medium">{{ classesFiltrees.length }} résultat(s)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vue Desktop - Tableau moderne -->
+        <div class="hidden lg:block">
+            <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/30 overflow-hidden">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-gray-50 via-blue-50 to-indigo-50 border-b-2 border-indigo-100">
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-tag text-indigo-500 text-lg"></i>
+                                    <span>Nom de la classe</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-layer-group text-blue-500 text-lg"></i>
+                                    <span>Niveau</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-graduation-cap text-emerald-500 text-lg"></i>
+                                    <span>Spécialité</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-left text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-building text-purple-500 text-lg"></i>
+                                    <span>Département</span>
+                                </div>
+                            </th>
+                            <th class="px-8 py-6 text-center text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                <div class="flex items-center justify-center space-x-3">
+                                    <i class="fas fa-cogs text-gray-500 text-lg"></i>
+                                    <span>Actions</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr *ngFor="let classe of classesFiltrees; let i = index"
+                            class="hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-indigo-50/50 transition-all duration-300 group"
+                            [style.animation-delay.ms]="i * 100">
+                            <td class="px-8 py-6">
+                                <div class="flex items-center space-x-4">
+                                    <div
+                                        class="w-3 h-3 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    </div>
+                                    <span
+                                        class="text-lg font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">
+                                        {{ classe.libelle }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span
+                                    class="inline-flex items-center px-4 py-2 rounded-2xl text-sm font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-2 border-blue-200 shadow-sm">
+                                    {{ classe.niveau }}
+                                </span>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="text-lg text-gray-700 font-medium">{{ classe.specialite }}</span>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="text-lg text-gray-700 font-medium">{{ classe.departement }}</span>
+                            </td>
+                            <td class="px-8 py-6">
+                                <div class="flex items-center justify-center space-x-3">
+                                    <button (click)="ouvrirModal(true, classe)"
+                                        class="group/btn p-3 text-emerald-600 hover:text-white hover:bg-emerald-500 rounded-2xl transition-all duration-200 transform hover:scale-110 shadow-lg hover:shadow-xl"
+                                        title="Modifier la classe">
+                                        <i class="fas fa-edit text-lg"></i>
+                                    </button>
+                                    <button (click)="details(classe.id!)"
+                                        class="group/btn p-3 text-blue-600 hover:text-white hover:bg-blue-500 rounded-2xl transition-all duration-200 transform hover:scale-110 shadow-lg hover:shadow-xl"
+                                        title="Voir les détails">
+                                        <i class="fas fa-eye text-lg"></i>
+                                    </button>
+                                    <button (click)="supprimer(classe.id!)"
+                                        class="group/btn p-3 text-red-600 hover:text-white hover:bg-red-500 rounded-2xl transition-all duration-200 transform hover:scale-110 shadow-lg hover:shadow-xl"
+                                        title="Supprimer la classe">
+                                        <i class="fas fa-trash text-lg"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- État vide -->
+                        <tr *ngIf="classesFiltrees.length === 0">
+                            <td colspan="5" class="px-8 py-16 text-center">
+                                <div class="flex flex-col items-center space-y-6">
+                                    <div
+                                        class="w-24 h-24 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-folder-open text-gray-400 text-3xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-semibold text-gray-600 mb-2">Aucune classe trouvée</p>
+                                        <p class="text-lg text-gray-400">Ajoutez votre première classe ou modifiez vos
+                                            critères de recherche</p>
+                                    </div>
+                                    <button (click)="ouvrirModal()"
+                                        class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-200 flex items-center space-x-2">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Créer une classe</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Vue Mobile - Cartes -->
+        <div class="lg:hidden space-y-6">
+            <div *ngFor="let classe of classesFiltrees; let i = index"
+                class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-white/30 p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                [style.animation-delay.ms]="i * 100">
+
+                <!-- En-tête de la carte -->
+                <div class="flex justify-between items-start mb-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-4 h-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"></div>
+                        <h3 class="text-xl font-bold text-gray-900">{{ classe.libelle }}</h3>
+                    </div>
+                    <span
+                        class="inline-flex items-center px-4 py-2 rounded-2xl text-sm font-bold bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-2 border-blue-200">
+                        {{ classe.niveau }}
+                    </span>
+                </div>
+
+                <!-- Informations de la classe -->
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-2xl">
+                        <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-emerald-600 text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Spécialité</p>
+                            <p class="text-lg font-semibold text-gray-900">{{ classe.specialite }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-2xl">
+                        <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-building text-purple-600 text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Département</p>
+                            <p class="text-lg font-semibold text-gray-900">{{ classe.departement }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions de la carte -->
+                <div class="flex justify-between items-center pt-4 border-t-2 border-gray-100">
+                    <div class="flex space-x-3">
+                        <button (click)="ouvrirModal(true, classe)"
+                            class="flex items-center space-x-2 px-4 py-3 text-emerald-600 hover:bg-emerald-50 rounded-2xl transition-all duration-200 transform hover:scale-105">
+                            <i class="fas fa-edit"></i>
+                            <span class="font-semibold">Modifier</span>
+                        </button>
+                        <button (click)="details(classe.id!)"
+                            class="flex items-center space-x-2 px-4 py-3 text-blue-600 hover:bg-blue-50 rounded-2xl transition-all duration-200 transform hover:scale-105">
+                            <i class="fas fa-eye"></i>
+                            <span class="font-semibold">Détails</span>
+                        </button>
+                    </div>
+                    <button (click)="supprimer(classe.id!)"
+                        class="p-3 text-red-600 hover:bg-red-50 rounded-2xl transition-all duration-200 transform hover:scale-105">
+                        <i class="fas fa-trash text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- État vide mobile -->
+            <div *ngIf="classesFiltrees.length === 0" class="text-center py-16">
+                <div class="flex flex-col items-center space-y-6">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
+                        <i class="fas fa-folder-open text-gray-400 text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xl font-semibold text-gray-600 mb-2">Aucune classe trouvée</p>
+                        <p class="text-gray-400">Ajoutez une classe ou modifiez votre recherche</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL MODERNE AJOUT/MODIFICATION -->
+<div id="ajouterClasseModal"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50 hidden p-4 transition-all duration-300">
+    <div
+        class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl relative transform transition-all duration-300 max-h-[90vh] overflow-y-auto">
+
+        <!-- En-tête du modal -->
+        <div
+            class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 rounded-t-3xl p-8 relative overflow-hidden">
+            <div class="absolute inset-0 bg-white/10"></div>
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-white/5 rounded-full"></div>
+
+            <div class="relative flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                        <i class="fas fa-school text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-1">
+                            {{ modeModification ? 'Modifier la classe' : 'Nouvelle classe' }}
+                        </h3>
+                        <p class="text-white/90 text-lg">
+                            {{ modeModification ? 'Modifiez les informations de la classe' : 'Créez une nouvelle classe
+                            pour votre établissement' }}
+                        </p>
+                    </div>
+                </div>
+                <button (click)="fermerModal()"
+                    class="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-2xl flex items-center justify-center transition-all duration-200 group backdrop-blur-sm">
+                    <i class="fas fa-times text-white text-xl group-hover:rotate-90 transition-transform duration-200"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Corps du modal -->
+        <div class="p-8">
+            <form [formGroup]="classeForm" (ngSubmit)="onSubmit()" class="space-y-8">
+
+                <!-- Grille des champs -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <!-- Nom de la classe -->
+                    <div class="lg:col-span-2">
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-tag text-indigo-600"></i>
+                            </div>
+                            <span>Nom de la classe</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-bookmark text-gray-400"></i>
+                            </div>
+                            <input formControlName="libelle" type="text"
+                                class="w-full pl-12 pr-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg group-hover:shadow-lg"
+                                placeholder="Ex: 6ème A, Terminal S1, Master Info..." />
+                        </div>
+                        <div *ngIf="libelleControl?.invalid && libelleControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="font-semibold">Le nom de la classe est obligatoire</span>
+                        </div>
+                    </div>
+
+                    <!-- Niveau -->
+                    <div>
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-layer-group text-blue-600"></i>
+                            </div>
+                            <span>Niveau</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-chart-line text-gray-400"></i>
+                            </div>
+                            <input formControlName="niveau" type="text"
+                                class="w-full pl-12 pr-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg hover:shadow-lg"
+                                placeholder="Ex: Collège, Lycée, Université..." />
+                        </div>
+                        <div *ngIf="niveauControl?.invalid && niveauControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="font-semibold">Le niveau est obligatoire</span>
+                        </div>
+                    </div>
+
+                    <!-- Spécialité -->
+                    <div>
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-emerald-600"></i>
+                            </div>
+                            <span>Spécialité</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-microscope text-gray-400"></i>
+                            </div>
+                            <input formControlName="specialite" type="text"
+                                class="w-full pl-12 pr-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg hover:shadow-lg"
+                                placeholder="Ex: Informatique, Mathématiques, Littéraire..." />
+                        </div>
+                        <div *ngIf="specialiteControl?.invalid && specialiteControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="font-semibold">La spécialité est obligatoire</span>
+                        </div>
+                    </div>
+
+                    <!-- Département -->
+                    <div class="lg:col-span-2">
+                        <label class="flex items-center space-x-3 text-lg font-bold text-gray-700 mb-4">
+                            <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-building text-purple-600"></i>
+                            </div>
+                            <span>Département</span>
+                            <span class="text-red-500 text-xl">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-sitemap text-gray-400"></i>
+                            </div>
+                            <input formControlName="departement" type="text"
+                                class="w-full pl-12 pr-6 py-4 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 transition-all duration-200 text-lg hover:shadow-lg"
+                                placeholder="Ex: Sciences, Lettres, Technologie, Arts..." />
+                        </div>
+                        <div *ngIf="departementControl?.invalid && departementControl?.touched"
+                            class="flex items-center space-x-3 text-red-500 text-base mt-3 bg-red-50 px-4 py-2 rounded-xl">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span class="font-semibold">Le département est obligatoire</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zone d'aide -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-2xl border-2 border-blue-100">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-lightbulb text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-blue-900 mb-2">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Conseils pour bien remplir
+                            </h4>
+                            <ul class="text-blue-800 space-y-2 text-base">
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check-circle text-blue-600 mt-1 flex-shrink-0"></i>
+                                    <span><strong>Département :</strong> Organisez vos classes par département</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boutons d'action -->
+                <div
+                    class="flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-6 border-t-2 border-gray-100">
+                    <button type="button" (click)="fermerModal()"
+                        class="group px-8 py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-2xl font-bold transition-all duration-200 transform hover:scale-105 text-lg">
+                        <div class="flex items-center justify-center space-x-3">
+                            <i class="fas fa-times group-hover:-translate-x-1 transition-transform duration-200"></i>
+                            <span>Annuler</span>
+                        </div>
+                    </button>
+                    <button type="submit"
+                        class="group relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white px-12 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl text-lg overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                        <div class="relative flex items-center justify-center space-x-3">
+                            <i [class]="modeModification ? 'fas fa-save' : 'fas fa-plus'" 
+                               class="group-hover:rotate-12 transition-transform duration-300"></i>
+                            <span>{{ modeModification ? 'Mettre à jour' : 'Créer la classe' }}</span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Intégration de Font Awesome pour les icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Styles CSS additionnels -->
+<style>
+    /* Animations personnalisées */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Effets au survol pour les cartes */
+    .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Animation d'apparition des éléments */
+    .animate-item {
+        animation: slideDown 0.6s ease-out both;
+    }
+
+    /* Effet de brillance sur les boutons */
+    .btn-shine {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-shine::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .btn-shine:hover::before {
+        left: 100%;
+    }
+
+    /* Scrollbar personnalisée */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #4f46e5, #7c3aed);
+    }
+
+    /* Focus visible amélioré */
+    input:focus,
+    select:focus,
+    button:focus {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    /* Effet de pulsation pour les éléments importants */
+    .pulse-glow {
+        animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+        50% {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
+        }
+    }
+
+    /* Animation des icônes au hover */
+    .group:hover .fas {
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Styles personnalisés pour les icônes colorées */
+    .icon-indigo { color: #6366f1; }
+    .icon-blue { color: #3b82f6; }
+    .icon-emerald { color: #10b981; }
+    .icon-purple { color: #8b5cf6; }
+    .icon-red { color: #ef4444; }
+
+    /* Animation de rotation pour les boutons d'action */
+    .action-btn:hover i {
+        animation: bounce 0.5s ease-in-out;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-5px);
+        }
+        60% {
+            transform: translateY(-3px);
+        }
+    }
+
+    /* Effet glassmorphism pour les conteneurs principaux */
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    /* Animation pour les statistiques */
+    .stat-counter {
+        animation: countUp 1s ease-out;
+    }
+
+    @keyframes countUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Effet hover pour les lignes de tableau */
+    tbody tr {
+        transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+        transform: translateX(8px);
+        background: linear-gradient(90deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+    }
+
+    /* Animation des icônes dans les en-têtes de colonnes */
+    th .fas {
+        transition: all 0.3s ease;
+    }
+
+    th:hover .fas {
+        transform: scale(1.2) rotate(10deg);
+        filter: brightness(1.2);
+    }
+
+    /* Style pour les badges de niveau */
+    .niveau-badge {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .niveau-badge::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.5s;
+    }
+
+    .niveau-badge:hover::before {
+        left: 100%;
+    }
+
+    /* Responsive design pour les icônes */
+    @media (max-width: 768px) {
+        .fas {
+            font-size: 1rem !important;
+        }
+        
+        .text-2xl .fas {
+            font-size: 1.5rem !important;
+        }
+        
+        .text-3xl .fas {
+            font-size: 2rem !important;
+        }
+    }
+</style>
