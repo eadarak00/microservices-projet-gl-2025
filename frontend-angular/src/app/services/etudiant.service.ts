@@ -18,7 +18,8 @@ const LISTER_ETUDIANTS = gql`
       nom
       prenom
       telephone
-      adresse
+      adresse,
+      classeId
     }
   }
 `;

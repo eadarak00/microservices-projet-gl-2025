@@ -11,4 +11,5 @@ type Etudiant {
   prenom: String
   telephone : String
   adresse: String
+  classeId : String
 }
